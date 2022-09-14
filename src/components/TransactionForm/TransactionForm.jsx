@@ -1,4 +1,4 @@
-const TransactionForm = () => {
+const TransactionForm = ({ openCategory }) => {
   return (
     <form action="">
       <label>
@@ -11,7 +11,11 @@ const TransactionForm = () => {
       </label>
       <label>
         <p>Category</p>
-        <input type="button" value={'Food'} />
+        <input
+          type="button"
+          value={'Category'}
+          onClick={() => openCategory()}
+        />
       </label>
       <label>
         <p>Same</p>
