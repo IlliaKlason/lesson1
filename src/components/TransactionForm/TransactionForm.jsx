@@ -1,6 +1,9 @@
-import { Component } from 'react';
-
-class TransactionForm extends Component {
+const TransactionForm = ({
+  cbHandelSubmit,
+  stateProps,
+  handleChange,
+  openCategory,
+}) => {
   // state = {
   //   date: '',
   //   time: '',
@@ -16,61 +19,62 @@ class TransactionForm extends Component {
   //     [name]: value,
   //   });
   // };
+  const { date, time, category, summary, currency, comment } = stateProps;
+  const handleSubmit = e => {
+    e.preventDefault();
+    cbHandelSubmit(stateProps);
+  };
 
-  render() {
-    const { date, time, category, summary, currency, comment } =
-      this.props.stateProps;
-    const { handleChange, openCategory } = this.props;
-    return (
-      <form action="">
-        <label>
-          <p>Date</p>
-          <input type="date" value={date} onChange={handleChange} name="date" />
-        </label>
-        <label>
-          <p>Time</p>
-          <input type="time" value={time} name="time" onChange={handleChange} />
-        </label>
-        <label>
-          <p>Category</p>
-          <input
-            type="button"
-            name="category"
-            value={category}
-            onClick={() => openCategory()}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <p>Summary</p>
-          <input
-            type="text"
-            name="summary"
-            value={summary}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <p>Currency</p>
-          <input
-            value={currency}
-            type="button"
-            name="currency"
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            placeholder="Comment"
-            name="comment"
-            value={comment}
-            onChange={handleChange}
-          />
-        </label>
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        <p>Date</p>
+        <input type="date" value={date} onChange={handleChange} name="date" />
+      </label>
+      <label>
+        <p>Time</p>
+        <input type="time" value={time} name="time" onChange={handleChange} />
+      </label>
+      <label>
+        <p>Category</p>
+        <input
+          type="button"
+          name="category"
+          value={category}
+          onClick={() => openCategory()}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        <p>Summary</p>
+        <input
+          type="text"
+          name="summary"
+          value={summary}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        <p>Currency</p>
+        <input
+          value={currency}
+          type="button"
+          name="currency"
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        <input
+          type="text"
+          placeholder="Comment"
+          name="comment"
+          value={comment}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">SUBMIT</button>
+    </form>
+  );
+};
 
 export default TransactionForm;

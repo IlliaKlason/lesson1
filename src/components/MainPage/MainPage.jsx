@@ -46,6 +46,7 @@ class MainPage extends Component {
               openCategory={this.openCategory}
               stateProps={stateProps}
               handleChange={this.handleChange}
+              cbHandelSubmit={this.props.addTransaction}
             />
             <MainButtons changePageHandler={this.props.changePageHandler} />
           </>
