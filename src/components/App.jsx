@@ -6,7 +6,7 @@ import TransactionHistoryPage from './TransactionHistoryPage';
 export class App extends Component {
   state = {
     activePage: 'main',
-    transaction: [],
+    transactions: [],
   };
   changePageHandler = page => {
     this.setState({ activePage: page });
@@ -14,7 +14,7 @@ export class App extends Component {
 
   addTransaction = transaction => {
     this.setState(prevState => ({
-      transaction: [...prevState.transaction, transaction],
+      transactions: [...prevState.transactions, transaction],
     }));
   };
   render() {
@@ -29,6 +29,7 @@ export class App extends Component {
           <TransactionHistoryPage
             transactionType={this.state.activePage}
             changePageHandler={this.changePageHandler}
+            transactions={this.state.transactions}
           />
         )}
       </div>

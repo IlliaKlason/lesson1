@@ -4,21 +4,6 @@ const TransactionForm = ({
   handleChange,
   openCategory,
 }) => {
-  // state = {
-  //   date: '',
-  //   time: '',
-  //   category: 'food',
-  //   same: '',
-  //   currency: 'UAH',
-  //   comment: '',
-  // };
-  // Записывает валью в стате
-  // handleChange = e => {
-  //   const { name, value } = e.target;
-  //   this.setState({
-  //     [name]: value,
-  //   });
-  // };
   const { date, time, category, summary, currency, comment } = stateProps;
   const handleSubmit = e => {
     e.preventDefault();
