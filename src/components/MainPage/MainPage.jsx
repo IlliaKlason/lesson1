@@ -8,7 +8,21 @@ import { Component } from 'react';
 class MainPage extends Component {
   state = {
     isCategories: false,
+    date: '',
+    time: '',
+    category: 'food',
+    same: '',
+    currency: 'UAH',
+    comment: '',
   };
+
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
   openCategory = () => {
     this.setState({ isCategories: true });
   };
@@ -16,12 +30,16 @@ class MainPage extends Component {
     this.setState({ isCategories: false });
   };
   render() {
+    const { isCategories, ...stateProps } = this.state;
     return (
       <>
         {!this.state.isCategories ? (
           <>
             <Header title="Журнал расходов" />
-            <TransactionForm openCategory={this.openCategory} />
+            <TransactionForm
+              openCategory={this.openCategory}
+              stateProps={stateProps}
+            />
             <MainButtons changePageHandler={this.props.changePageHandler} />
           </>
         ) : (
