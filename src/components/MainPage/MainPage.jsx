@@ -11,7 +11,7 @@ class MainPage extends Component {
     date: '',
     time: '',
     category: 'food',
-    same: '',
+    summary: '',
     currency: 'UAH',
     comment: '',
   };
@@ -29,6 +29,12 @@ class MainPage extends Component {
   closeCategory = () => {
     this.setState({ isCategories: false });
   };
+
+  setCategory = category => {
+    this.setState({ category });
+    this.closeCategory();
+  };
+
   render() {
     const { isCategories, ...stateProps } = this.state;
     return (
@@ -39,14 +45,23 @@ class MainPage extends Component {
             <TransactionForm
               openCategory={this.openCategory}
               stateProps={stateProps}
+              handleChange={this.handleChange}
             />
             <MainButtons changePageHandler={this.props.changePageHandler} />
           </>
         ) : (
-          <Categories
-            categoriesList={categoriesList}
-            closeCategory={this.closeCategory}
-          />
+          <>
+            <Header
+              title="Categories"
+              btnContent={'back'}
+              closeCategory={this.closeCategory}
+            />
+            <Categories
+              setCategory={this.setCategory}
+              categoriesList={categoriesList}
+              closeCategory={this.closeCategory}
+            />
+          </>
         )}
       </>
     );

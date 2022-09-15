@@ -18,26 +18,18 @@ class TransactionForm extends Component {
   // };
 
   render() {
-    const { date, time, category, same, currency, comment } = this.state;
+    const { date, time, category, summary, currency, comment } =
+      this.props.stateProps;
+    const { handleChange, openCategory } = this.props;
     return (
       <form action="">
         <label>
           <p>Date</p>
-          <input
-            type="date"
-            value={date}
-            onChange={this.handleChange}
-            name="date"
-          />
+          <input type="date" value={date} onChange={handleChange} name="date" />
         </label>
         <label>
           <p>Time</p>
-          <input
-            type="time"
-            value={time}
-            name="time"
-            onChange={this.handleChange}
-          />
+          <input type="time" value={time} name="time" onChange={handleChange} />
         </label>
         <label>
           <p>Category</p>
@@ -45,17 +37,17 @@ class TransactionForm extends Component {
             type="button"
             name="category"
             value={category}
-            onClick={() => this.props.openCategory()}
-            onChange={this.handleChange}
+            onClick={() => openCategory()}
+            onChange={handleChange}
           />
         </label>
         <label>
-          <p>Same</p>
+          <p>Summary</p>
           <input
             type="text"
-            name="same"
-            value={same}
-            onChange={this.handleChange}
+            name="summary"
+            value={summary}
+            onChange={handleChange}
           />
         </label>
         <label>
@@ -64,7 +56,7 @@ class TransactionForm extends Component {
             value={currency}
             type="button"
             name="currency"
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </label>
         <label>
@@ -73,7 +65,7 @@ class TransactionForm extends Component {
             placeholder="Comment"
             name="comment"
             value={comment}
-            onChange={this.handleChange}
+            onChange={handleChange}
           />
         </label>
       </form>
