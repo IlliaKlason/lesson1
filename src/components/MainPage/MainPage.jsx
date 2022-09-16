@@ -41,7 +41,7 @@ class MainPage extends Component {
       <>
         {!this.state.isCategories ? (
           <>
-            <Header title="Журнал расходов" />
+            <Header title="Wallet" />
             <TransactionForm
               openCategory={this.openCategory}
               stateProps={stateProps}

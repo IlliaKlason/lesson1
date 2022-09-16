@@ -9,7 +9,7 @@ export class App extends Component {
     activePage: 'main',
     transactions: [],
   };
-  changePageHandler = page => {
+  changePageHandler = (page = 'main') => {
     this.setState({ activePage: page });
   };
 
