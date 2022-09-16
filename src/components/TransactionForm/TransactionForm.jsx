@@ -1,3 +1,13 @@
+import {
+  Form,
+  Label,
+  InputTitle,
+  Input,
+  Submit,
+} from './TransactionForm.styled';
+
+import sprite from '../../assets/icons/sprite.svg';
+
 const TransactionForm = ({
   cbHandelSubmit,
   stateProps,
@@ -11,54 +21,59 @@ const TransactionForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <p>Date</p>
-        <input type="date" value={date} onChange={handleChange} name="date" />
-      </label>
-      <label>
-        <p>Time</p>
-        <input type="time" value={time} name="time" onChange={handleChange} />
-      </label>
-      <label>
-        <p>Category</p>
-        <input
+    <Form onSubmit={handleSubmit}>
+      <Label>
+        <InputTitle>Date</InputTitle>
+        <Input type="date" value={date} onChange={handleChange} name="date" />
+      </Label>
+      <Label>
+        <InputTitle>Time</InputTitle>
+        <Input type="time" value={time} name="time" onChange={handleChange} />
+      </Label>
+      <Label>
+        <InputTitle>Category</InputTitle>
+        <Input
           type="button"
           name="category"
           value={category}
           onClick={() => openCategory()}
           onChange={handleChange}
         />
-      </label>
-      <label>
-        <p>Summary</p>
-        <input
+      </Label>
+      <Label>
+        <InputTitle>Summary</InputTitle>
+        <Input
           type="text"
           name="summary"
           value={summary}
+          placeholder="Summary"
           onChange={handleChange}
         />
-      </label>
-      <label>
-        <p>Currency</p>
-        <input
+      </Label>
+      <Label>
+        <InputTitle>Currency</InputTitle>
+        <Input
           value={currency}
           type="button"
           name="currency"
           onChange={handleChange}
         />
-      </label>
-      <label>
-        <input
+      </Label>
+      <Label>
+        <Input
           type="text"
           placeholder="Comment"
           name="comment"
           value={comment}
           onChange={handleChange}
         />
-      </label>
-      <button type="submit">SUBMIT</button>
-    </form>
+      </Label>
+      <Submit type="submit">
+        <svg>
+          <use href={sprite + '#icon-checkmark'}></use>
+        </svg>
+      </Submit>
+    </Form>
   );
 };
 

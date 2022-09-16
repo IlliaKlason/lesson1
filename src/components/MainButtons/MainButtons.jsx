@@ -1,9 +1,10 @@
+import { WrapperButton, Button } from './MainButtons.styled';
 const MainButtons = ({ changePageHandler }) => {
   return (
-    <div>
-      <button onClick={() => changePageHandler('income')}>Income</button>
-      <button onClick={() => changePageHandler('expensive')}>Expenses</button>
-    </div>
+    <WrapperButton>
+      <Button onClick={() => changePageHandler('income')}>Income</Button>
+      <Button onClick={() => changePageHandler('expensive')}>Expenses</Button>
+    </WrapperButton>
   );
 };
 

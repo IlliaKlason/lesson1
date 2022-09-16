@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import MainPage from './MainPage/MainPage';
 import TransactionHistoryPage from './TransactionHistoryPage';
+import Container from './Container';
 
 export class App extends Component {
   state = {
@@ -19,7 +20,7 @@ export class App extends Component {
   };
   render() {
     return (
-      <div>
+      <Container>
         {this.state.activePage === 'main' ? (
           <MainPage
             changePageHandler={this.changePageHandler}
@@ -32,7 +33,7 @@ export class App extends Component {
             transactions={this.state.transactions}
           />
         )}
-      </div>
+      </Container>
     );
   }
 }
