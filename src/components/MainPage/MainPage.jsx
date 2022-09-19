@@ -2,7 +2,7 @@ import Header from '../Header';
 import TransactionForm from 'components/TransactionForm';
 import MainButtons from 'components/MainButtons';
 import Categories from 'components/Categories';
-import { categoriesList } from '../../data/categoriesList';
+// import { categoriesList } from '../../data/categoriesList';
 import { Component } from 'react';
 
 class MainPage extends Component {
@@ -38,6 +38,8 @@ class MainPage extends Component {
 
   render() {
     const { isCategories, ...stateProps } = this.state;
+    const { addTransaction, changePageHandler, addCategory, categories } =
+      this.props;
     return (
       <>
         {!this.state.isCategories ? (
@@ -47,9 +49,9 @@ class MainPage extends Component {
               openCategory={this.openCategory}
               stateProps={stateProps}
               handleChange={this.handleChange}
-              cbHandelSubmit={this.props.addTransaction}
+              cbHandelSubmit={addTransaction}
             />
-            <MainButtons changePageHandler={this.props.changePageHandler} />
+            <MainButtons changePageHandler={changePageHandler} />
           </>
         ) : (
           <>
@@ -59,9 +61,15 @@ class MainPage extends Component {
               closeCategory={this.closeCategory}
             />
             <Categories
+              addCategory={addCategory}
               setCategory={this.setCategory}
-              categoriesList={categoriesList}
+              categoriesList={
+                stateProps.transactionType === 'expensive'
+                  ? categories.expensiveCategories
+                  : categories.incomeCategories
+              }
               closeCategory={this.closeCategory}
+              transactionType={stateProps.transactionType}
             />
           </>
         )}
