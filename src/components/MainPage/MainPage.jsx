@@ -14,6 +14,7 @@ class MainPage extends Component {
     summary: '',
     currency: 'UAH',
     comment: '',
+    transactionType: 'expensive',
   };
 
   handleChange = e => {

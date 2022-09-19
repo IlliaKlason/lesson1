@@ -14,7 +14,8 @@ const TransactionForm = ({
   handleChange,
   openCategory,
 }) => {
-  const { date, time, category, summary, currency, comment } = stateProps;
+  const { date, time, category, summary, currency, comment, transactionType } =
+    stateProps;
   const handleSubmit = e => {
     e.preventDefault();
     cbHandelSubmit(stateProps);
@@ -22,6 +23,26 @@ const TransactionForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
+      <label>
+        <span>Income</span>
+        <input
+          type="radio"
+          name="transactionType"
+          value="income"
+          onChange={handleChange}
+          checked={transactionType === 'income'}
+        />
+      </label>
+      <label>
+        <span>Expensive</span>
+        <input
+          type="radio"
+          name="transactionType"
+          value="expensive"
+          onChange={handleChange}
+          checked={transactionType === 'expensive'}
+        />
+      </label>
       <Label>
         <InputTitle>Date</InputTitle>
         <Input type="date" value={date} onChange={handleChange} name="date" />

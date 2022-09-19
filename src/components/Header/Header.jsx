@@ -2,7 +2,6 @@ import { HeaderStyled, Button } from './Heder.styled';
 import PropTypes from 'prop-types';
 import sprite from '../../assets/icons/sprite.svg';
 
-console.log(sprite);
 const Header = ({ title, btnContent, closeCategory }) => {
   return (
     <HeaderStyled>
