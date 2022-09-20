@@ -4,6 +4,7 @@ import { Component } from 'react';
 class Categories extends Component {
   state = {
     input: '',
+    idMenu: '',
   };
 
   handleChange = e => {
@@ -11,8 +12,17 @@ class Categories extends Component {
       input: e.target.value,
     });
   };
+  reset = () => {
+    this.setState({ input: '' });
+  };
+  handleOpenMenu = id => {
+    this.setState(prevState => {
+      return { idMenu: prevState.idMenu === id ? '' : id };
+    });
+  };
   handleSubmit = e => {
     e.preventDefault();
+
     const { addCategory, transactionType } = this.props;
     addCategory(
       {
@@ -21,10 +31,12 @@ class Categories extends Component {
       },
       transactionType
     );
+    this.reset();
   };
 
   render() {
     const { categoriesList, setCategory } = this.props;
+    const { idMenu } = this.state;
     return (
       <>
         <ul>
@@ -34,7 +46,17 @@ class Categories extends Component {
                 <button onClick={() => setCategory(category)}>
                   {category}
                 </button>
-                <button>...</button>
+                <button onClick={() => this.handleOpenMenu(id)}>...</button>
+                {idMenu === id && (
+                  <ul>
+                    <li>
+                      <button>Edit</button>
+                    </li>
+                    <li>
+                      <button>Delete</button>
+                    </li>
+                  </ul>
+                )}
               </li>
             );
           })}

@@ -81,6 +81,7 @@ const TransactionForm = ({
         />
       </Label>
       <Label>
+        <InputTitle>Comment</InputTitle>
         <Input
           type="text"
           placeholder="Comment"

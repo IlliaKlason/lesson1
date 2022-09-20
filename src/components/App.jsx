@@ -16,16 +16,35 @@ export class App extends Component {
     if (prevState.expensive !== this.state.expensive) {
       localStorage.setItem('expensive', JSON.stringify(this.state.expensive));
     }
-    if (prevState.income !== this.state.income) {
+    if (prevState.expensiveCategories !== this.state.expensiveCategories) {
       localStorage.setItem('expensive', JSON.stringify(this.state.income));
     }
+    if (prevState.expensiveCategories !== this.state.expensiveCategories) {
+      localStorage.setItem(
+        'expensiveCategories',
+        JSON.stringify(this.state.expensiveCategories)
+      );
+    }
+    if (prevState.incomeCategories !== this.state.incomeCategories) {
+      localStorage.setItem(
+        'incomeCategories',
+        JSON.stringify(this.state.incomeCategories)
+      );
+    }
   }
+
   componentDidMount() {
     const income = JSON.parse(localStorage.getItem('income')) || [];
     const expensive = JSON.parse(localStorage.getItem('expensive')) || [];
+    const incomeCategories =
+      JSON.parse(localStorage.getItem('incomeCategories')) || [];
+    const expensiveCategories =
+      JSON.parse(localStorage.getItem('expensiveCategories')) || [];
     this.setState({
       income: income,
       expensive: expensive,
+      incomeCategories,
+      expensiveCategories,
     });
   }
 
@@ -47,10 +66,7 @@ export class App extends Component {
         : { incomeCategories: [...prev.incomeCategories, category] };
     });
   };
-  //   {
-  //     id: 1,
-  //     category: 'food',
-  //  }
+
   render() {
     const {
       expensive,
