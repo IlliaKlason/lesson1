@@ -38,7 +38,7 @@ class MainPage extends Component {
 
   render() {
     const { isCategories, ...stateProps } = this.state;
-    const { addTransaction, changePageHandler, addCategory, categories } =
+    const { addTransaction, changePageHandler, addCategory, deleteCategory, categories } =
       this.props;
     return (
       <>
@@ -61,6 +61,7 @@ class MainPage extends Component {
               closeCategory={this.closeCategory}
             />
             <Categories
+            deleteCategory={deleteCategory}
               addCategory={addCategory}
               setCategory={this.setCategory}
               categoriesList={

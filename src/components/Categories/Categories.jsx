@@ -23,19 +23,26 @@ class Categories extends Component {
   handleSubmit = e => {
     e.preventDefault();
 
-    const { addCategory, transactionType } = this.props;
-    addCategory(
-      {
-        id: Date.now(),
-        category: this.state.input,
-      },
-      transactionType
+    const { addCategory, transactionType, categoriesList } = this.props;
+    const normalizedInput = this.state.input.toUpperCase();
+    const value = categoriesList.some(
+      elem => elem.category.toUpperCase() === normalizedInput
     );
+    value
+      ? alert('Added')
+      : addCategory(
+          {
+            id: Date.now(),
+            category: this.state.input,
+          },
+          transactionType
+        );
     this.reset();
   };
 
   render() {
-    const { categoriesList, setCategory } = this.props;
+    const { categoriesList, setCategory, deleteCategory, transactionType } =
+      this.props;
     const { idMenu } = this.state;
     return (
       <>
@@ -50,10 +57,15 @@ class Categories extends Component {
                 {idMenu === id && (
                   <ul>
                     <li>
-                      <button>Edit</button>
+                      <button type="button">Edit</button>
                     </li>
                     <li>
-                      <button>Delete</button>
+                      <button
+                        type="button"
+                        onClick={() => deleteCategory(id, transactionType)}
+                      >
+                        Delete
+                      </button>
                     </li>
                   </ul>
                 )}

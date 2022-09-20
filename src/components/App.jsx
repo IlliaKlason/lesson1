@@ -66,6 +66,21 @@ export class App extends Component {
         : { incomeCategories: [...prev.incomeCategories, category] };
     });
   };
+  deleteCategory = (id, transactionType) => {
+    this.setState(prev => {
+      return transactionType === 'expensive'
+        ? {
+            expensiveCategories: prev.expensiveCategories.filter(
+              expCategory => expCategory.id !== id
+            ),
+          }
+        : {
+            incomeCategories: prev.incomeCategories.filter(
+              incCategory => incCategory.id !== id
+            ),
+          };
+    });
+  };
 
   render() {
     const {
@@ -82,6 +97,7 @@ export class App extends Component {
             changePageHandler={this.changePageHandler}
             addTransaction={this.addTransaction}
             addCategory={this.addCategory}
+            deleteCategory={this.deleteCategory}
             categories={{
               expensiveCategories,
               incomeCategories,
