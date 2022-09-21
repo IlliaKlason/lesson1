@@ -3,11 +3,25 @@ import TransactionForm from 'components/TransactionForm';
 import MainButtons from 'components/MainButtons';
 import Categories from 'components/Categories';
 // import { categoriesList } from '../../data/categoriesList';
-import { Component } from 'react';
-
-class MainPage extends Component {
-  state = {
-    isCategories: false,
+import { useState } from 'react';
+const initialForm = {
+  isCategories: false,
+  date: '',
+  time: '',
+  category: 'food',
+  summary: '',
+  currency: 'UAH',
+  comment: '',
+  transactionType: 'expensive',
+};
+const MainPage = ({
+  addTransaction,
+  changePageHandler,
+  addCategory,
+  deleteCategory,
+  categories,
+}) => {
+  const [form, setForm] = useState({
     date: '',
     time: '',
     category: 'food',
@@ -15,67 +29,69 @@ class MainPage extends Component {
     currency: 'UAH',
     comment: '',
     transactionType: 'expensive',
-  };
+  });
+  const [isCategories, setIsCategories] = useState(false);
 
-  handleChange = e => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    this.setState({
-      [name]: value,
+    setForm(prevForm => {
+      return { ...prevForm, [name]: value };
     });
   };
 
-  openCategory = () => {
-    this.setState({ isCategories: true });
+  const openCategory = () => {
+    setIsCategories(true);
   };
-  closeCategory = () => {
-    this.setState({ isCategories: false });
-  };
-
-  setCategory = category => {
-    this.setState({ category });
-    this.closeCategory();
+  const closeCategory = () => {
+    setIsCategories(false);
   };
 
-  render() {
-    const { isCategories, ...stateProps } = this.state;
-    const { addTransaction, changePageHandler, addCategory, deleteCategory, categories } =
-      this.props;
-    return (
-      <>
-        {!this.state.isCategories ? (
-          <>
-            <Header title="Wallet" />
-            <TransactionForm
-              openCategory={this.openCategory}
-              stateProps={stateProps}
-              handleChange={this.handleChange}
-              cbHandelSubmit={addTransaction}
-            />
-            <MainButtons changePageHandler={changePageHandler} />
-          </>
-        ) : (
-          <>
-            <Header
-              title="Categories"
-              btnContent={'back'}
-              closeCategory={this.closeCategory}
-            />
-            <Categories
+  const setCategory = category => {
+    setForm(prevForm => {
+      return { ...prevForm, category };
+    });
+    closeCategory();
+  };
+  const reset = () => {
+    setForm(initialForm);
+  };
+  return (
+    <>
+      {!isCategories ? (
+        <>
+          <Header title="Wallet" />
+          <TransactionForm
+            openCategory={openCategory}
+            stateProps={form}
+            handleChange={handleChange}
+            cbHandelSubmit={addTransaction}
+            reset={reset}
+          />
+          <MainButtons changePageHandler={changePageHandler} />
+        </>
+      ) : (
+        <>
+          <Header
+            title="Categories"
+            btnContent={'back'}
+            closeCategory={closeCategory}
+          />
+          <Categories
             deleteCategory={deleteCategory}
-              addCategory={addCategory}
-              setCategory={this.setCategory}
-              categoriesList={
-                stateProps.transactionType === 'expensive'
-                  ? categories.expensiveCategories
-                  : categories.incomeCategories
-              }
-              closeCategory={this.closeCategory}
-              transactionType={stateProps.transactionType}
-            />
-          </>
-        )}
-      </>
-    );
-  }
-}
+            addCategory={addCategory}
+            setCategory={setCategory}
+            categoriesList={
+              form.transactionType === 'expensive'
+                ? categories.expensiveCategories
+                : categories.incomeCategories
+            }
+            closeCategory={closeCategory}
+            transactionType={form.transactionType}
+          />
+        </>
+      )}
+    </>
+  );
+};
+
 export default MainPage;

@@ -16,8 +16,8 @@ export class App extends Component {
     if (prevState.expensive !== this.state.expensive) {
       localStorage.setItem('expensive', JSON.stringify(this.state.expensive));
     }
-    if (prevState.expensiveCategories !== this.state.expensiveCategories) {
-      localStorage.setItem('expensive', JSON.stringify(this.state.income));
+    if (prevState.income !== this.state.income) {
+      localStorage.setItem('income', JSON.stringify(this.state.income));
     }
     if (prevState.expensiveCategories !== this.state.expensiveCategories) {
       localStorage.setItem(
@@ -41,8 +41,8 @@ export class App extends Component {
     const expensiveCategories =
       JSON.parse(localStorage.getItem('expensiveCategories')) || [];
     this.setState({
-      income: income,
-      expensive: expensive,
+      income,
+      expensive,
       incomeCategories,
       expensiveCategories,
     });

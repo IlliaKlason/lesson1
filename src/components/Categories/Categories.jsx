@@ -16,7 +16,7 @@ const Categories = ({
   const [idMenu, setIdMenu] = useState('');
 
   const handleChange = e => {
-    setInput(e.target.value);
+    setInput(e.target.value.trimStart());
   };
   const reset = () => {
     setInput('');
@@ -33,7 +33,9 @@ const Categories = ({
       alert('Enter');
       return;
     }
-    const normalizedInput = input.toUpperCase();
+    const inputTrim = input.trimEnd();
+    const normalizedInput = inputTrim.toUpperCase();
+
     const value = categoriesList.some(
       elem => elem.category.toUpperCase() === normalizedInput
     );

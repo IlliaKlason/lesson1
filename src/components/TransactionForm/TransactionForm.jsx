@@ -13,12 +13,14 @@ const TransactionForm = ({
   stateProps,
   handleChange,
   openCategory,
+  reset,
 }) => {
   const { date, time, category, summary, currency, comment, transactionType } =
     stateProps;
   const handleSubmit = e => {
     e.preventDefault();
     cbHandelSubmit(stateProps);
+    reset();
   };
 
   return (
