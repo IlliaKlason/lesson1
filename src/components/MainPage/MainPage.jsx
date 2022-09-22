@@ -80,11 +80,11 @@ const MainPage = ({
             deleteCategory={deleteCategory}
             addCategory={addCategory}
             setCategory={setCategory}
-            categoriesList={
-              form.transactionType === 'expensive'
-                ? categories.expensiveCategories
-                : categories.incomeCategories
-            }
+            // categoriesList={
+            //   form.transactionType === 'expensive'
+            //     ? categories.expensiveCategories
+            //     : categories.incomeCategories
+            // }
             closeCategory={closeCategory}
             transactionType={form.transactionType}
           />

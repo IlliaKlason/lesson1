@@ -1,17 +1,22 @@
 import PropTypes from 'prop-types';
+import { useContext } from 'react';
 import { useState } from 'react';
+import { CategoriesContext } from '../../context';
 
 const Categories = ({
-  categoriesList,
+  // categoriesList,
   setCategory,
-  deleteCategory,
+  // deleteCategory,
   transactionType,
-  addCategory,
+  // addCategory,
 }) => {
-  // state = {
-  //   input: '',
-  //   idMenu: '',
-  // };
+  const valueCategories = useContext(CategoriesContext);
+  const { addCategory, deleteCategory, expensiveCategories, incomeCategories } =
+    valueCategories;
+
+  const categoriesList =
+    transactionType === 'expensive' ? expensiveCategories : incomeCategories;
+
   const [input, setInput] = useState('');
   const [idMenu, setIdMenu] = useState('');
 
@@ -93,15 +98,7 @@ const Categories = ({
 };
 
 Categories.propTypes = {
-  categoriesList: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      category: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  addCategory: PropTypes.func.isRequired,
   transactionType: PropTypes.string.isRequired,
-  deleteCategory: PropTypes.func.isRequired,
   setCategory: PropTypes.func.isRequired,
 };
 

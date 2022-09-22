@@ -5,8 +5,8 @@ import { getInitialState, setToLS } from '../helpers';
 export const TransactionContext = createContext();
 
 const TransactionProvider = ({ children }) => {
-  const [expensive, setExpensive] = useState(getInitialState('expensive'));
-  const [income, setIncome] = useState(getInitialState('income'));
+  const [expensive, setExpensive] = useState(getInitialState('expensive', []));
+  const [income, setIncome] = useState(getInitialState('income', []));
 
   const addTransaction = transaction => {
     const { transactionType } = transaction;

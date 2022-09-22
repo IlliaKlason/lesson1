@@ -1,4 +1,7 @@
 
 import { default as TransactionProvider } from './TransactionProvider'
 import { TransactionContext } from './TransactionProvider'
-export { TransactionProvider, TransactionContext } 
+import { default as CategoriesProvider } from './CategoriesProvider'
+import { CategoriesContext } from './CategoriesProvider'
+
+export { TransactionProvider, TransactionContext, CategoriesProvider, CategoriesContext } 
