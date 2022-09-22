@@ -1,0 +1,1 @@
+export { getInitialState, setToLS } from './localS'

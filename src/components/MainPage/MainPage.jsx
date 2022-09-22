@@ -64,7 +64,7 @@ const MainPage = ({
             openCategory={openCategory}
             stateProps={form}
             handleChange={handleChange}
-            cbHandelSubmit={addTransaction}
+            // cbHandelSubmit={addTransaction}
             reset={reset}
           />
           <MainButtons changePageHandler={changePageHandler} />

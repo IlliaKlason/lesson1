@@ -1,4 +1,5 @@
 import Header from 'components/Header';
+import { useContext } from 'react';
 import {
   List,
   Item,
@@ -7,12 +8,15 @@ import {
   Summary,
   Currency,
 } from './TransactionHistoryPage.styled';
+import { TransactionContext } from '../../context';
 
 const TransactionHistoryPage = ({
   transactionType,
   changePageHandler,
-  transactions,
+  // transactions,
 }) => {
+  const transactionsValue = useContext(TransactionContext);
+  const transactions = transactionsValue[transactionType];
   return (
     <>
       <Header

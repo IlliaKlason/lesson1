@@ -5,11 +5,13 @@ import {
   Input,
   Submit,
 } from './TransactionForm.styled';
+import { useContext } from 'react';
+import { TransactionContext } from '../../context';
 
 import sprite from '../../assets/icons/sprite.svg';
 
 const TransactionForm = ({
-  cbHandelSubmit,
+  // cbHandelSubmit,
   stateProps,
   handleChange,
   openCategory,
@@ -17,9 +19,11 @@ const TransactionForm = ({
 }) => {
   const { date, time, category, summary, currency, comment, transactionType } =
     stateProps;
+
+  const { addTransaction } = useContext(TransactionContext);
   const handleSubmit = e => {
     e.preventDefault();
-    cbHandelSubmit(stateProps);
+    addTransaction(stateProps);
     reset();
   };
 

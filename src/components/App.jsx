@@ -4,16 +4,11 @@ import MainPage from './MainPage/MainPage';
 import TransactionHistoryPage from './TransactionHistoryPage';
 import Container from './Container';
 
-const getInitialState = KEY => {
-  return JSON.parse(localStorage.getItem(KEY)) || [];
-};
-const setToLS = (KEY, data) => {
-  return localStorage.setItem(KEY, JSON.stringify(data));
-};
+import { getInitialState, setToLS } from '../helpers';
+
 export const App = () => {
   const [activePage, setActivePage] = useState('main');
-  const [expensive, setExpensive] = useState(getInitialState('expensive'));
-  const [income, setIncome] = useState(getInitialState('income'));
+
   const [expensiveCategories, setExpensiveCategories] = useState(
     getInitialState('expensiveCategories')
   );
@@ -21,12 +16,6 @@ export const App = () => {
     getInitialState('incomeCategories')
   );
 
-  useEffect(() => {
-    setToLS('expensive', expensive);
-  }, [expensive]);
-  useEffect(() => {
-    setToLS('income', income);
-  }, [income]);
   useEffect(() => {
     setToLS('expensiveCategories', expensiveCategories);
   }, [expensiveCategories]);
@@ -36,20 +25,6 @@ export const App = () => {
 
   const changePageHandler = (page = 'main') => {
     setActivePage(page);
-  };
-
-  const addTransaction = transaction => {
-    const { transactionType } = transaction;
-    if (transactionType === 'income') {
-      setIncome(prevIncome => {
-        return [...prevIncome, transaction];
-      });
-    }
-    if (transactionType === 'expensive') {
-      setExpensive(prevExpensive => {
-        return [...prevExpensive, transaction];
-      });
-    }
   };
 
   const addCategory = (category, transactionType) => {
@@ -83,7 +58,6 @@ export const App = () => {
       {activePage === 'main' ? (
         <MainPage
           changePageHandler={changePageHandler}
-          addTransaction={addTransaction}
           addCategory={addCategory}
           deleteCategory={deleteCategory}
           categories={{
@@ -95,7 +69,7 @@ export const App = () => {
         <TransactionHistoryPage
           transactionType={activePage}
           changePageHandler={changePageHandler}
-          transactions={activePage === 'expensive' ? expensive : income}
+          // transactions={activePage === 'expensive' ? expensive : income}
         />
       )}
     </Container>
