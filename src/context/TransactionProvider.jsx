@@ -26,7 +26,18 @@ const TransactionProvider = ({ children }) => {
       });
     }
   };
-
+  const deleteTransaction = (id, transactionType) => {
+    if (transactionType === 'expensive') {
+      setExpensive(prevExpensive => {
+        return prevExpensive.filter(expCategory => expCategory.id !== id);
+      });
+    }
+    if (transactionType === 'income') {
+      setIncome(prevIncome => {
+        return prevIncome.filter(incCategory => incCategory.id !== id);
+      });
+    }
+  };
   useEffect(() => {
     if (isFirstRenderRef.current.e) {
       isFirstRenderRef.current.e = false;
@@ -44,7 +55,9 @@ const TransactionProvider = ({ children }) => {
     setToLS('income', income);
   }, [income]);
   return (
-    <TransactionContext.Provider value={{ addTransaction, expensive, income }}>
+    <TransactionContext.Provider
+      value={{ addTransaction, expensive, income, deleteTransaction }}
+    >
       {children}
     </TransactionContext.Provider>
   );

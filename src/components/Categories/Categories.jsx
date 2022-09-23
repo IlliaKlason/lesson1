@@ -3,13 +3,7 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import { CategoriesContext } from '../../context';
 
-const Categories = ({
-  // categoriesList,
-  setCategory,
-  // deleteCategory,
-  transactionType,
-  // addCategory,
-}) => {
+const Categories = ({ setCategory, transactionType }) => {
   const valueCategories = useContext(CategoriesContext);
   const { addCategory, deleteCategory, expensiveCategories, incomeCategories } =
     valueCategories;

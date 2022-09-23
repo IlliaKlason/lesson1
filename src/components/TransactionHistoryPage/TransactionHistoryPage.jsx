@@ -1,5 +1,5 @@
 import Header from 'components/Header';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {
   List,
   Item,
@@ -15,23 +15,25 @@ const TransactionHistoryPage = ({
   changePageHandler,
   // transactions,
 }) => {
+  const [idMenu, setIdMenu] = useState('');
   const transactionsValue = useContext(TransactionContext);
   const transactions = transactionsValue[transactionType];
+
+  const handleOpenMenu = id => {
+    setIdMenu(prevIdMenu => {
+      return prevIdMenu === id ? '' : id;
+    });
+  };
   return (
     <>
       <Header
         title={transactionType === 'income' ? 'Income' : 'Expensive'}
         closeCategory={changePageHandler}
       />
-      {/* <h2>TransactionHistoryPage {'transactionType'}</h2> */}
-      {/* 
-      <button type="button" onClick={() => changePageHandler('main')}>
-        Back to Main
-      </button> */}
       <List>
-        {transactions.map(({ date, time, comment, summary, currency }) => {
+        {transactions.map(({ id, date, time, comment, summary, currency }) => {
           return (
-            <Item key={Date.now()}>
+            <Item key={id}>
               <MainWrapper>
                 <div>
                   <DateContainer>
@@ -45,7 +47,26 @@ const TransactionHistoryPage = ({
                   <Currency>{currency}</Currency>
                 </div>
               </MainWrapper>
-              <button type="button">OPTIONS</button>
+              <button type="button" onClick={() => handleOpenMenu(id)}>
+                OPTIONS
+              </button>
+              {idMenu === id && (
+                <ul>
+                  <li>
+                    <button type="button">Edit</button>
+                  </li>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        transactionsValue.deleteTransaction(id, transactionType)
+                      }
+                    >
+                      Delete
+                    </button>
+                  </li>
+                </ul>
+              )}
             </Item>
           );
         })}
