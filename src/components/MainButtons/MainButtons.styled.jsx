@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const WrapperButton = styled.div`
@@ -9,8 +10,11 @@ export const WrapperButton = styled.div`
 
   background-color: greenyellow;
 `;
-export const Button = styled.button`
+export const Button = styled(Link)`
   min-width: 150px;
   padding: 12px;
   font-size: 20px;
+  background-color: grey;
+  text-decoration: none;
+  color: black;
 `;
