@@ -3,7 +3,7 @@ import { useState } from 'react';
 import MainPage from './MainPage/MainPage';
 import TransactionHistoryPage from './TransactionHistoryPage';
 import Container from './Container';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 export const App = () => {
   // const [activePage, setActivePage] = useState('main');
@@ -28,6 +28,7 @@ export const App = () => {
           path="/history/:transactionType"
           element={<TransactionHistoryPage />}
         />
+        <Route path="*" element={<Navigate to="/transaction" />} />
       </Routes>
     </Container>
   );

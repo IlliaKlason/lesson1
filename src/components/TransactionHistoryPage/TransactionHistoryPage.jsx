@@ -32,6 +32,7 @@ const TransactionHistoryPage = () =>
     return (
       <>
         <Header
+          to={'/transaction'}
           title={transactionType === 'income' ? 'Income' : 'Expensive'}
           // closeCategory={changePageHandler}
         />

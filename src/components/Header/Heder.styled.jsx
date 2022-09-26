@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const HeaderStyled = styled.header`
@@ -8,6 +9,20 @@ export const HeaderStyled = styled.header`
 `;
 
 export const Button = styled.button`
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  background: none;
+  & svg {
+    width: 30px;
+    height: 30px;
+  }
+`;
+export const ButtonLink = styled(Link)`
   width: 50px;
   height: 50px;
   display: flex;
