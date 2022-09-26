@@ -4,6 +4,7 @@ import MainButtons from 'components/MainButtons';
 import Categories from 'components/Categories';
 // import { categoriesList } from '../../data/categoriesList';
 import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 const initialForm = {
   isCategories: false,
   date: '',
@@ -30,7 +31,7 @@ const MainPage = ({
     comment: '',
     transactionType: 'expensive',
   });
-  const [isCategories, setIsCategories] = useState(false);
+  // const [isCategories, setIsCategories] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -40,10 +41,10 @@ const MainPage = ({
   };
 
   const openCategory = () => {
-    setIsCategories(true);
+    // setIsCategories(true);
   };
   const closeCategory = () => {
-    setIsCategories(false);
+    // setIsCategories(false);
   };
 
   const setCategory = category => {
@@ -57,34 +58,39 @@ const MainPage = ({
   };
   return (
     <>
-      {!isCategories ? (
-        <>
-          <Header title="Wallet" />
-          <TransactionForm
-            openCategory={openCategory}
-            stateProps={form}
-            handleChange={handleChange}
-            // cbHandelSubmit={addTransaction}
-            reset={reset}
-          />
-          <MainButtons changePageHandler={changePageHandler} />
-        </>
-      ) : (
-        <>
-          <Header
-            title="Categories"
-            btnContent={'back'}
-            closeCategory={closeCategory}
-          />
-          <Categories
-            deleteCategory={deleteCategory}
-            addCategory={addCategory}
-            setCategory={setCategory}
-            closeCategory={closeCategory}
-            transactionType={form.transactionType}
-          />
-        </>
-      )}
+      <Routes>
+        <Route
+          index
+          element={
+            <>
+              <Header title="Wallet" />
+              <TransactionForm
+                openCategory={openCategory}
+                stateProps={form}
+                handleChange={handleChange}
+                // cbHandelSubmit={addTransaction}
+                reset={reset}
+              />
+              <MainButtons changePageHandler={changePageHandler} />
+            </>
+          }
+        />
+        <Route
+          path="categories"
+          element={
+            <>
+              <Header title="Categories" closeCategory={closeCategory} />
+              <Categories
+                deleteCategory={deleteCategory}
+                addCategory={addCategory}
+                setCategory={setCategory}
+                closeCategory={closeCategory}
+                transactionType={form.transactionType}
+              />
+            </>
+          }
+        />
+      </Routes>
     </>
   );
 };

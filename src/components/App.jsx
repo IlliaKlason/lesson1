@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 
 import MainPage from './MainPage/MainPage';
 import TransactionHistoryPage from './TransactionHistoryPage';
@@ -23,7 +23,7 @@ export const App = () => {
         />
       )} */}
       <Routes>
-        <Route path="/transaction" element={<MainPage />} />
+        <Route path="/transaction/*" element={<MainPage />} />
         <Route
           path="/history/:transactionType"
           element={<TransactionHistoryPage />}
