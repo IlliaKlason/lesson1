@@ -3,14 +3,14 @@ import { composeWithDevTools } from '@redux-devtools/extension';
 import { transactionReducer } from './transactions/transactionReducer';
 
 const state = {
-  transaction: {
+  transactions: {
     income: [],
     expensive: [],
   },
 };
 
 const rootReducer = combineReducers({
-  transaction: transactionReducer,
+  transactions: transactionReducer,
 });
 
 export const store = createStore(rootReducer, composeWithDevTools());

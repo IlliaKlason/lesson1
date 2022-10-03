@@ -9,16 +9,26 @@ import { useContext } from 'react';
 import { TransactionContext } from '../../context';
 
 import sprite from '../../assets/icons/sprite.svg';
+import { useDispatch } from 'react-redux';
+import {
+  addExpensive,
+  addIncome,
+} from 'redux/transactions/transactionsActions';
 
 const TransactionForm = ({ stateProps, handleChange, openCategory, reset }) => {
   const { date, time, category, summary, currency, comment, transactionType } =
     stateProps;
 
-  const { addTransaction } = useContext(TransactionContext);
+  const dispatch = useDispatch();
+  // const { addTransaction } = useContext(TransactionContext);
   const handleSubmit = e => {
     e.preventDefault();
     stateProps.id = Date.now();
-    addTransaction(stateProps);
+    stateProps.transactionType === 'income' && dispatch(addIncome(stateProps));
+    stateProps.transactionType === 'expensive' &&
+      dispatch(addExpensive(stateProps));
+
+    // addTransaction(stateProps);
     reset();
   };
 

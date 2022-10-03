@@ -9,8 +9,9 @@ import {
   Summary,
   Currency,
 } from './TransactionHistoryPage.styled';
-import { TransactionContext } from '../../context';
+// import { TransactionContext } from '../../context';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const TransactionHistoryPage = () =>
   // {
@@ -21,7 +22,7 @@ const TransactionHistoryPage = () =>
   {
     const { transactionType } = useParams();
     const [idMenu, setIdMenu] = useState('');
-    const transactionsValue = useContext(TransactionContext);
+    const transactionsValue = useSelector(state => state.transactions);
     const transactions = transactionsValue[transactionType];
 
     const handleOpenMenu = id => {
