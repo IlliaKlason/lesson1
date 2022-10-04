@@ -1,9 +1,15 @@
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { CategoriesContext } from '../../context';
+import {
+  addExpensiveCategory,
+  addIncomeCategory,
+} from '../../redux/categories/categoriesSlice';
 
 const Categories = ({ setCategory, transactionType }) => {
+  const dispatch = useDispatch();
   const valueCategories = useContext(CategoriesContext);
   const { addCategory, deleteCategory, expensiveCategories, incomeCategories } =
     valueCategories;
@@ -40,13 +46,20 @@ const Categories = ({ setCategory, transactionType }) => {
     );
     value
       ? alert('Added')
-      : addCategory(
-          {
+      : transactionType === 'expensive'
+      ? dispatch(
+          addExpensiveCategory({
             id: Date.now(),
             category: input,
-          },
-          transactionType
+          })
+        )
+      : dispatch(
+          addIncomeCategory({
+            id: Date.now(),
+            category: input,
+          })
         );
+
     reset();
   };
 

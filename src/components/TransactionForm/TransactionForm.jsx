@@ -5,8 +5,8 @@ import {
   Input,
   Submit,
 } from './TransactionForm.styled';
-import { useContext } from 'react';
-import { TransactionContext } from '../../context';
+// import { useContext } from 'react';
+// import { TransactionContext } from '../../context';
 
 import sprite from '../../assets/icons/sprite.svg';
 import { useDispatch } from 'react-redux';
@@ -14,12 +14,14 @@ import {
   addExpensive,
   addIncome,
 } from 'redux/transactions/transactionsActions';
+import { useNavigate } from 'react-router-dom';
 
 const TransactionForm = ({ stateProps, handleChange, openCategory, reset }) => {
   const { date, time, category, summary, currency, comment, transactionType } =
     stateProps;
 
   const dispatch = useDispatch();
+  const navigation = useNavigate();
   // const { addTransaction } = useContext(TransactionContext);
   const handleSubmit = e => {
     e.preventDefault();
@@ -68,7 +70,7 @@ const TransactionForm = ({ stateProps, handleChange, openCategory, reset }) => {
           type="button"
           name="category"
           value={category}
-          onClick={() => openCategory()}
+          onClick={() => navigation('categories')}
           onChange={handleChange}
         />
       </Label>
