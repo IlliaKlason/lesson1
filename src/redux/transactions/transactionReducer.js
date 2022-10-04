@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { TRANSACTION_ADD_EXPENSIVE, TRANSACTION_ADD_INCOME } from './constants';
-
+// eslint-disable-next-line
 const state = {
   income: [],
   expensive: [],

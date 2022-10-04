@@ -1,9 +1,10 @@
-import { combineReducers, createStore } from 'redux';
-import { composeWithDevTools } from '@redux-devtools/extension';
+import { combineReducers } from 'redux';
+// import { composeWithDevTools } from '@redux-devtools/extension';
 import { transactionReducer } from './transactions/transactionReducer';
 import { configureStore } from '@reduxjs/toolkit';
 import categoriesReducer from '../redux/categories/categoriesSlice';
 
+// eslint-disable-next-line
 const state = {
   transactions: {
     income: [],

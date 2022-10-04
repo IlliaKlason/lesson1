@@ -4,7 +4,9 @@ import MainButtons from 'components/MainButtons';
 import Categories from 'components/Categories';
 // import { categoriesList } from '../../data/categoriesList';
 import { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+// import categoriesRedux from 'redux/categories/categoriesSlice';
+
 const initialForm = {
   isCategories: false,
   date: '',
@@ -32,7 +34,7 @@ const MainPage = ({
     transactionType: 'expensive',
   });
   // const [isCategories, setIsCategories] = useState(false);
-
+  const navigate = useNavigate();
   const handleChange = e => {
     const { name, value } = e.target;
     setForm(prevForm => {
@@ -45,6 +47,7 @@ const MainPage = ({
   };
   const closeCategory = () => {
     // setIsCategories(false);
+    navigate(-1);
   };
 
   const setCategory = category => {

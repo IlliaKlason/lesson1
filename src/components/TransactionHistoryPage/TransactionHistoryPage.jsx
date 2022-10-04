@@ -1,5 +1,5 @@
 import Header from 'components/Header';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import {
   List,

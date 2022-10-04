@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { CategoriesContext } from '../../context';
+import { useDispatch, useSelector } from 'react-redux';
+// import { CategoriesContext } from '../../context';
 import {
   addExpensiveCategory,
   addIncomeCategory,
+  removeExpensiveCategory,
+  removeIncomeCategory,
 } from '../../redux/categories/categoriesSlice';
 
 const Categories = ({ setCategory, transactionType }) => {
   const dispatch = useDispatch();
-  const valueCategories = useContext(CategoriesContext);
-  const { addCategory, deleteCategory, expensiveCategories, incomeCategories } =
-    valueCategories;
+  const categories = useSelector(({ categories }) => categories);
 
   const categoriesList =
-    transactionType === 'expensive' ? expensiveCategories : incomeCategories;
+    transactionType === 'expensive' ? categories.expensive : categories.income;
 
   const [input, setInput] = useState('');
   const [idMenu, setIdMenu] = useState('');
@@ -63,6 +63,10 @@ const Categories = ({ setCategory, transactionType }) => {
     reset();
   };
 
+  const removeCategory = id =>
+    transactionType === 'expensive'
+      ? dispatch(removeExpensiveCategory(id))
+      : dispatch(removeIncomeCategory(id));
   return (
     <>
       <ul>
@@ -77,10 +81,7 @@ const Categories = ({ setCategory, transactionType }) => {
                     <button type="button">Edit</button>
                   </li>
                   <li>
-                    <button
-                      type="button"
-                      onClick={() => deleteCategory(id, transactionType)}
-                    >
+                    <button type="button" onClick={() => removeCategory(id)}>
                       Delete
                     </button>
                   </li>
