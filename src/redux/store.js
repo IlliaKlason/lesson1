@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 // import { composeWithDevTools } from '@redux-devtools/extension';
-import { transactionReducer } from './transactions/transactionReducer';
+import transactionReducer from './transactions/transactionSlice';
 import { configureStore } from '@reduxjs/toolkit';
 import categoriesReducer from '../redux/categories/categoriesSlice';
 

@@ -15,6 +15,14 @@ import {
   addIncome,
 } from 'redux/transactions/transactionsActions';
 import { useNavigate } from 'react-router-dom';
+import {
+  addExpensiveTransactionsAPI,
+  addIncomeTransactionsAPI,
+} from 'services/fireBaseAPI';
+import {
+  addExpensiveTransactions,
+  addIncomeTransactions,
+} from 'redux/transactions/transactionOperation';
 
 const TransactionForm = ({ stateProps, handleChange, openCategory, reset }) => {
   const { date, time, category, summary, currency, comment, transactionType } =
@@ -26,9 +34,10 @@ const TransactionForm = ({ stateProps, handleChange, openCategory, reset }) => {
   const handleSubmit = e => {
     e.preventDefault();
     stateProps.id = Date.now();
-    stateProps.transactionType === 'income' && dispatch(addIncome(stateProps));
+    stateProps.transactionType === 'income' &&
+      dispatch(addIncomeTransactions(stateProps));
     stateProps.transactionType === 'expensive' &&
-      dispatch(addExpensive(stateProps));
+      dispatch(addExpensiveTransactions(stateProps));
 
     // addTransaction(stateProps);
     reset();
