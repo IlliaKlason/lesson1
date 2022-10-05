@@ -18,3 +18,17 @@ export const addExpensiveTransactionsAPI = data => {
     return { id: res.data.name, ...data };
   });
 };
+
+export const getTransactionsAPI = async () => {
+  try {
+    const response = await axios.get('transactions.json').then();
+    const { income, expensive } = response.data;
+    const incomeArray = Object.entries(income);
+    const expensiveArray = Object.entries(expensive).map(([id, data]) => {
+      return { id, ...data };
+    });
+    return { expensive: expensiveArray, income: incomeArray };
+  } catch (error) {
+    console.log(error);
+  }
+};

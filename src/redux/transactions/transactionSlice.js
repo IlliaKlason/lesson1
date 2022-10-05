@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
-import { TRANSACTION_ADD_EXPENSIVE, TRANSACTION_ADD_INCOME } from './constants';
+// import { combineReducers } from 'redux';
+// import { TRANSACTION_ADD_EXPENSIVE, TRANSACTION_ADD_INCOME } from './constants';
 import {
   addExpensiveTransactions,
   addIncomeTransactions,
+  getTransactions,
 } from './transactionOperation';
 // eslint-disable-next-line
 // const state = {
@@ -39,6 +40,16 @@ export const transactionSlice = createSlice({
       state.expensive.push(payload);
     },
     [addExpensiveTransactions.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [getTransactions.pending]: state => {
+      state.isLoading = true;
+    },
+    [getTransactions.fulfilled]: (state, { payload }) => {
+      return { ...state, isLoading: false, ...payload };
+    },
+    [getTransactions.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },

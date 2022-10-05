@@ -10,15 +10,15 @@ import {
 
 import sprite from '../../assets/icons/sprite.svg';
 import { useDispatch } from 'react-redux';
-import {
-  addExpensive,
-  addIncome,
-} from 'redux/transactions/transactionsActions';
+// import {
+//   addExpensive,
+//   addIncome,
+// } from 'redux/transactions/transactionsActions';
 import { useNavigate } from 'react-router-dom';
-import {
-  addExpensiveTransactionsAPI,
-  addIncomeTransactionsAPI,
-} from 'services/fireBaseAPI';
+// import {
+//   addExpensiveTransactionsAPI,
+//   addIncomeTransactionsAPI,
+// } from 'services/fireBaseAPI';
 import {
   addExpensiveTransactions,
   addIncomeTransactions,
