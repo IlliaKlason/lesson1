@@ -1,22 +1,29 @@
 import PropTypes from 'prop-types';
 // import { useContext } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addIncomeCategory,
   addExpensiveCategory,
+  getCategoriesOperation,
+  deleteExpensiveCategories,
+  deleteIncomeCategories,
 } from 'redux/categories/categoriesOperations';
 // import { CategoriesContext } from '../../context';
-import {
-  // addExpensiveCategory,
-  // addIncomeCategory,
-  removeExpensiveCategory,
-  removeIncomeCategory,
-} from '../../redux/categories/categoriesSlice';
+// import {
+//   // addExpensiveCategory,
+//   // addIncomeCategory,
+//   removeExpensiveCategory,
+//   removeIncomeCategory,
+// } from '../../redux/categories/categoriesSlice';
 
 const Categories = ({ setCategory, transactionType }) => {
   const dispatch = useDispatch();
   const categories = useSelector(({ categories }) => categories);
+
+  useEffect(() => {
+    dispatch(getCategoriesOperation(transactionType)());
+  }, [dispatch, transactionType]);
 
   const categoriesList =
     transactionType === 'expensive' ? categories.expensive : categories.income;
@@ -45,15 +52,13 @@ const Categories = ({ setCategory, transactionType }) => {
     }
 
     const inputTrim = input.trimEnd();
-    const normalizedInput = inputTrim.toUpperCase();
+    // const normalizedInput = inputTrim.toUpperCase();
 
-    const value = categoriesList.some(
-      elem => elem.category.toUpperCase() === normalizedInput
-    );
+    // const value = categoriesList.some(
+    //   elem => elem.category.toUpperCase() === normalizedInput
+    // );
 
-    value
-      ? alert('Added')
-      : transactionType === 'expensive'
+    transactionType === 'expensive'
       ? dispatch(
           addExpensiveCategory({
             category: inputTrim,
@@ -70,8 +75,8 @@ const Categories = ({ setCategory, transactionType }) => {
 
   const removeCategory = id =>
     transactionType === 'expensive'
-      ? dispatch(removeExpensiveCategory(id))
-      : dispatch(removeIncomeCategory(id));
+      ? dispatch(deleteExpensiveCategories(id))
+      : dispatch(deleteIncomeCategories(id));
   return (
     <>
       <ul>

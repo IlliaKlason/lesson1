@@ -23,10 +23,8 @@ export const getTransactionsAPI = async () => {
   try {
     const response = await axios.get('transactions.json').then();
     const { income, expensive } = response.data;
-    const incomeArray = Object.entries(income);
-    const expensiveArray = Object.entries(expensive).map(([id, data]) => {
-      return { id, ...data };
-    });
+    const incomeArray = updateDataObjectToArray(income);
+    const expensiveArray = updateDataObjectToArray(expensive);
     return { expensive: expensiveArray, income: incomeArray };
   } catch (error) {
     console.log(error);
@@ -40,5 +38,22 @@ export const addIncomeCategoryAPI = category => {
 export const addExpensiveCategoryAPI = category => {
   return axios.post('categories/expensive.json', category).then(res => {
     return { id: res.data.name, ...category };
+  });
+};
+
+export const getCategoriesAPI = categoryTransactionType => {
+  return axios
+    .get(`categories/${categoryTransactionType}.json`)
+    .then(res => updateDataObjectToArray(res.data));
+};
+export const deleteCategoriesAPI = (categoryTransactionType, id) => {
+  return axios
+    .delete(`categories/${categoryTransactionType}/${id}.json`)
+    .then(res => res.data);
+};
+
+const updateDataObjectToArray = categories => {
+  return Object.entries(categories).map(([id, data]) => {
+    return { id, ...data };
   });
 };

@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
   addIncomeCategory,
   addExpensiveCategory,
+  getCategoriesOperation,
+  deleteExpensiveCategories,
+  deleteIncomeCategories,
 } from './categoriesOperations';
 export const categoriesSlice = createSlice({
   name: 'categories',
@@ -54,6 +57,50 @@ export const categoriesSlice = createSlice({
       state.expensive.push(payload);
     },
     [addExpensiveCategory.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [getCategoriesOperation('income').pending]: state => {
+      state.isLoading = true;
+    },
+    [getCategoriesOperation('income').fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.income = payload;
+    },
+    [getCategoriesOperation('income').rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [getCategoriesOperation('expensive').pending]: state => {
+      state.isLoading = true;
+    },
+    [getCategoriesOperation('expensive').fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.expensive = payload;
+    },
+    [getCategoriesOperation('expensive').rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [deleteExpensiveCategories.pending]: state => {
+      state.isLoading = true;
+    },
+    [deleteExpensiveCategories.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.expensive = state.expensive.filter(item => item.id !== payload);
+    },
+    [deleteExpensiveCategories.rejected]: (state, { payload }) => {
+      state.isLoading = false;
+      state.error = payload;
+    },
+    [deleteIncomeCategories.pending]: state => {
+      state.isLoading = true;
+    },
+    [deleteIncomeCategories.fulfilled]: (state, { payload }) => {
+      state.isLoading = false;
+      state.income = state.income.filter(item => item.id !== payload);
+    },
+    [deleteIncomeCategories.rejected]: (state, { payload }) => {
       state.isLoading = false;
       state.error = payload;
     },
