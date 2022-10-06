@@ -2,10 +2,14 @@ import PropTypes from 'prop-types';
 // import { useContext } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  addIncomeCategory,
+  addExpensiveCategory,
+} from 'redux/categories/categoriesOperations';
 // import { CategoriesContext } from '../../context';
 import {
-  addExpensiveCategory,
-  addIncomeCategory,
+  // addExpensiveCategory,
+  // addIncomeCategory,
   removeExpensiveCategory,
   removeIncomeCategory,
 } from '../../redux/categories/categoriesSlice';
@@ -34,29 +38,30 @@ const Categories = ({ setCategory, transactionType }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+
     if (!input) {
       alert('Enter');
       return;
     }
+
     const inputTrim = input.trimEnd();
     const normalizedInput = inputTrim.toUpperCase();
 
     const value = categoriesList.some(
       elem => elem.category.toUpperCase() === normalizedInput
     );
+
     value
       ? alert('Added')
       : transactionType === 'expensive'
       ? dispatch(
           addExpensiveCategory({
-            id: Date.now(),
-            category: input,
+            category: inputTrim,
           })
         )
       : dispatch(
           addIncomeCategory({
-            id: Date.now(),
-            category: input,
+            category: inputTrim,
           })
         );
 

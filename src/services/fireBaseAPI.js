@@ -32,3 +32,13 @@ export const getTransactionsAPI = async () => {
     console.log(error);
   }
 };
+export const addIncomeCategoryAPI = category => {
+  return axios.post('categories/income.json', category).then(res => {
+    return { id: res.data.name, ...category };
+  });
+};
+export const addExpensiveCategoryAPI = category => {
+  return axios.post('categories/expensive.json', category).then(res => {
+    return { id: res.data.name, ...category };
+  });
+};
